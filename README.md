@@ -1,11 +1,19 @@
 # gcore-ddns
 
 ## 配置项
-`token`：在网站 profile 中生成
+python gcore-ddns.py -h
+usage: gcore-ddns.py [-h] [--token TOKEN] [--domain DOMAIN] [--value VALUE] [--sub SUB] [--type TYPE] [--ttl TTL]
 
-`domain`：域名，如 gcore.com
+gcore ddns client
 
-`sub`：子域，如 dns
+options:
+  -h, --help       show this help message and exit
+  --token TOKEN    token -> token text file path
+  --domain DOMAIN  domain -> zone domain.
+  --value VALUE    value -> record ip. default is get from ipconfig.me
+  --sub SUB        sub -> sub.domain
+  --type TYPE      type -> default record type is A
+  --ttl TTL        ttl -> default record ttl is 300
 
 ## 如何使用
 填上配置项直接运行即可，子域不存在会自动创建。
