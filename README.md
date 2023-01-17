@@ -1,6 +1,7 @@
 # gcore-ddns
 
 ## 配置项
+```
 python gcore-ddns.py -h
 usage: gcore-ddns.py [-h] [--token TOKEN] [--domain DOMAIN] [--value VALUE] [--sub SUB] [--type TYPE] [--ttl TTL]
 
@@ -14,7 +15,7 @@ options:
   --sub SUB        sub -> sub.domain
   --type TYPE      type -> default record type is A
   --ttl TTL        ttl -> default record ttl is 300
-
+```
 ## 如何使用
 填上配置项直接运行即可，子域不存在会自动创建。
 
