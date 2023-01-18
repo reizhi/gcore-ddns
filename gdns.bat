@@ -1,31 +1,31 @@
 :: --------------------------------------------------------------
-::	ÏîÄ¿: CloudflareSpeedTest ×Ô¶¯¸üĞÂÓòÃû½âÎö¼ÇÂ¼
-::	°æ±¾: 1.0.4
-::	×÷Õß: XIU2
-::	ÏîÄ¿: https://github.com/XIU2/CloudflareSpeedTest
+::	é¡¹ç›®: CloudflareSpeedTest è‡ªåŠ¨æ›´æ–°åŸŸåè§£æè®°å½•
+::	ç‰ˆæœ¬: 1.0.4
+::	ä½œè€…: XIU2
+::	é¡¹ç›®: https://github.com/XIU2/CloudflareSpeedTest
 :: --------------------------------------------------------------
-::  ¹¦ÄÜ£º»ñÈ¡×î¿ìµÄ9¸öIP£¬¸üĞÂµ½ s1.example.com  ~~ s9.example.com
-::  ×÷Õß£ºevlon
-::  ÏîÄ¿£º https://github.com/evlon/gcore-ddns
+::  åŠŸèƒ½ï¼šè·å–æœ€å¿«çš„9ä¸ªIPï¼Œæ›´æ–°åˆ° s1.example.com  ~~ s9.example.com
+::  ä½œè€…ï¼ševlon
+::  é¡¹ç›®ï¼š https://github.com/evlon/gcore-ddns
 :: --------------------------------------------------------------
-
+chcp 65001
 @echo off
 Setlocal Enabledelayedexpansion
 
-:: ¶ÁÈ¡ÅäÖÃÎÄ¼ş
+:: è¯»å–é…ç½®æ–‡ä»¶
 for /f "delims=" %%i in ('type "gcore-config.ini"^| find /i "="') do set %%i
 
-:: ¸üĞÂ Gcore cdn IP
+:: æ›´æ–° Gcore cdn IP
 ::python gip.py
-echo '¸üĞÂ Gcore cdn IP Íê³É'
+echo 'æ›´æ–° Gcore cdn IP å®Œæˆ'
 
-:: ÕâÀï¿ÉÒÔ×Ô¼ºÌí¼Ó¡¢ĞŞ¸Ä CloudflareST µÄÔËĞĞ²ÎÊı£¬echo.| µÄ×÷ÓÃÊÇ×Ô¶¯»Ø³µÍË³ö³ÌĞò£¨²»ÔÙĞèÒª¼ÓÉÏ -p 0 ²ÎÊıÁË£©
+:: è¿™é‡Œå¯ä»¥è‡ªå·±æ·»åŠ ã€ä¿®æ”¹ CloudflareST çš„è¿è¡Œå‚æ•°ï¼Œecho.| çš„ä½œç”¨æ˜¯è‡ªåŠ¨å›è½¦é€€å‡ºç¨‹åºï¼ˆä¸å†éœ€è¦åŠ ä¸Š -p 0 å‚æ•°äº†ï¼‰
 echo.|CloudflareST.exe -o "result_ddns.txt" -f gcore-cdn-ip.txt -tl %TTL%
 
-:: ÅĞ¶Ï½á¹ûÎÄ¼şÊÇ·ñ´æÔÚ£¬Èç¹û²»´æÔÚËµÃ÷½á¹ûÎª 0
+:: åˆ¤æ–­ç»“æœæ–‡ä»¶æ˜¯å¦å­˜åœ¨ï¼Œå¦‚æœä¸å­˜åœ¨è¯´æ˜ç»“æœä¸º 0
 if not exist result_ddns.txt (
     echo.
-    echo CloudflareST ²âËÙ½á¹û IP ÊıÁ¿Îª 0£¬Ìø¹ıÏÂÃæ²½Öè...
+    echo CloudflareST æµ‹é€Ÿç»“æœ IP æ•°é‡ä¸º 0ï¼Œè·³è¿‡ä¸‹é¢æ­¥éª¤...
     goto :END
 )
 
@@ -34,11 +34,11 @@ for /f "tokens=1 delims=," %%i in (result_ddns.txt) do (
     Set /a n+=1 
     if "%%i"=="" (
         echo.
-        echo CloudflareST ²âËÙ½á¹û IP ÊıÁ¿Îª 0£¬Ìø¹ıÏÂÃæ²½Öè...
+        echo CloudflareST æµ‹é€Ÿç»“æœ IP æ•°é‡ä¸º 0ï¼Œè·³è¿‡ä¸‹é¢æ­¥éª¤...
         goto :END
     )
-    If !n! geq 2 if !idx! leq 9 (
-        :: ×¢Òâ¸ü»»
+    If !n! geq 2 if !idx! leq 3 (
+        :: æ³¨æ„æ›´æ¢
         python gdns.py --token .gcore-api-token --domain %ZONE% --sub %SUB%!idx! --value %%i --ttl 120
         set /a idx+=1
     )
