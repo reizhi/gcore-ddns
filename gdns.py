@@ -28,7 +28,7 @@ else:
     with open(tokenfile,'r') as f:
         token = f.read()
 
-    api_base = "https://api.gcorelabs.com/dns/v2/zones/"
+    api_base = "https://​api.​gcore.​com/dns/v2/zones/"
     APIKey = "APIKey " + token
     headers = {"Authorization": APIKey}
 
